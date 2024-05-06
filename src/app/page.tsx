@@ -15,42 +15,15 @@ import AboutCardComponent from '@/components/cards/AboutCardComponent';
 import AttractionComponent from '@/components/cards/AttractionComponent';
 import { Button } from 'flowbite-react';
 import { useGetProductsQuery } from '@/redux/service/ecommerce';
-import { useAppDispatch } from '@/redux/hooks';
-import { increment } from '@/redux/features/counter/counterSlice';
-import { addToCart } from '@/redux/features/cart/cartSlice';
 
 
 export default function Home() {
-  // const [products, setProduct] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, error } = useGetProductsQuery({
-    page: 1,
+    page: currentPage,
     pageSize: 8,
   })
   const products = data?.results ?? [];
-  // const fetchProduct = async (page:Number) => {
-  //   const product = await fetch(`https://store.istad.co/api/products/?page=${page}&page_size=8`, {
-  //     cache: "no-store"
-  //   });
-  //   const res = await product.json();
-  //   return res.results;
-  // }
-  // const useEffect(() => {
-  //   fetchData(currentPage);
-  // }, [currentPage]);
-
-  // const fetchData = async (page: Number) => {
-  //   try {
-  //     setLoading(true);
-  //     const productsData = await fetchProduct(page);
-  //     setProduct(productsData);
-  //   } catch (error) {
-  //     console.error("Error fetching product data:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
 
   const renderItem = ({
     key,
@@ -121,8 +94,8 @@ export default function Home() {
               <Pagination
                 disableCursorAnimation
                 showControls
-                total={8}
-                initialPage={1}
+                total={10}
+                initialPage={currentPage}
                 className="gap-2"
                 radius="full"
                 renderItem={renderItem}

@@ -13,7 +13,7 @@ export const makeStore = () => {
       counter: counterSlice,
       cart: cartSlice,
       userProfile: userProfileSlice,
-      // auth: authSlice
+      auth: authSlice
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(ecommerceApi.middleware),

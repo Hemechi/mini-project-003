@@ -1,16 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import style from "./style.module.css";
 import Link from "next/link";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
-
-
 import { IoEyeOffSharp } from "react-icons/io5";
 import { IoEyeSharp } from "react-icons/io5";
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 type ValueTypes = {
@@ -32,6 +29,8 @@ export default function Login() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [loading, setLoading] = useState(false);
 
+	const router = useRouter();
+
 	const handleShowPassword = () => {
 		setShowPassword(!showPassword);
 		// Toggle password visibility
@@ -47,15 +46,17 @@ export default function Login() {
 			},
 			body: JSON.stringify(values),
 		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				setLoading(false);
-			})
-			.catch((error) => {
-				console.log(error);
-				setLoading(false);
-			});
+		.then((res) => res.json())
+		.then((data) => {
+			console.log(data);
+			router.push('/')
+			setLoading(false);
+
+		})
+		.catch((error) => {
+			console.log(error);
+			setLoading(false);
+		});
 	};
 
 	if (loading) {
@@ -131,17 +132,17 @@ export default function Login() {
 						Submit
 					</button>
 					<div className="grid grid-cols-2 gap-3 py-4">
-						<button onClick={() => signIn("google")} className="bg-white hover:bg-base-color-green hover:text-white shadow-lg flex justify-center rounded-lg p-4">
-						<FaGoogle />
+						<button onClick={() => signIn('google', { callbackUrl: '/' })} className="bg-white hover:bg-base-color-green hover:text-white shadow-lg flex justify-center rounded-lg p-4">
+							<FaGoogle />
 						</button>
-						<button onClick={() => signIn("github")} className="bg-white hover:bg-base-color-green hover:text-white shadow-lg flex justify-center rounded-lg p-4">
-						<FaGithub />
+						<button onClick={() => signIn('github', { callbackUrl: '/' })} className="bg-white hover:bg-base-color-green hover:text-white shadow-lg flex justify-center rounded-lg p-4">
+							<FaGithub />
 						</button>
 					</div>
-                    <div>
-                    Doesn't has an account?&nbsp;
-                    <Link className={`${style.link}`} href="/auth/register">Create new account</Link>
-                    </div>
+					<div>
+						Doesn't has an account?&nbsp;
+						<Link className={`${style.link}`} href="/register">Create new account</Link>
+					</div>
 				</Form>
 			</Formik>
 		</main>

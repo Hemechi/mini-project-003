@@ -34,7 +34,7 @@ const CreateProductForm = () => {
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append(
     "Authorization",
-    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0NTA2NzEwLCJpYXQiOjE3MTIzNDY3MTAsImp0aSI6ImI1MGRjMDdkZWE3NTRjMTNiYmVjNWMzOWFmMmExY2NiIiwidXNlcl9pZCI6MzR9.v7FTGPeL5cFWUMg0PfxKfpD6yFjHzfin8CveD-Sn-A0"
+    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE1MDAyOTY5LCJpYXQiOjE3MTUwMDI2MDksImp0aSI6ImY0ZGE4NGIxYmE1ODQ4MzU4ZmUxMDVjNGVkNzkyZjM5IiwidXNlcl9pZCI6MzR9.ba36tR_u6xySlpGzd5cP_7X7bzD6W5mfi7xw1gcJUgA"
   );
   myHeaders.append(
     "Cookie",

@@ -12,16 +12,23 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { menu } from "@/lib/definitions";
 import { useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { FaCartShopping } from "react-icons/fa6";
+import { DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
+import { signOut } from "next-auth/react";
 
 
 export default function NavbarComponent() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
   const router = useRouter()
+  const { data: session } = useSession();
+
+  const isLoggedIn = !!session;
+
   const cart = useAppSelector((state) => state.cart.products);
     let cartLength = cart?.length;
 
@@ -85,19 +92,48 @@ export default function NavbarComponent() {
       </NavbarItem>
     </NavbarContent>
     <NavbarContent justify="end">
-      <NavbarItem className="hidden lg:flex hover:text-base-color-green">
+      <NavbarItem className="hidden md:flex hover:text-base-color-green">
         <button onClick={() => router.push("/cart")} className='font-normal mr-2 rounded-lg w-max text-black text-3xl hover:text-base-color-red px-3 py-2 relative'>
                     <FaCartShopping className="text-md"/>
                     {<sup
                         className="bg-base-color-green pt-1 text-white rounded-full w-6 h-6 text-xs absolute -top-1 -right-1">{cartLength}</sup>}
                 </button>
       </NavbarItem>
-      <NavbarItem>
-        <Button as={Link} className="bg-base-color-red text-base-color-white" href="/auth/login" variant="flat">
+      {!isLoggedIn && (
+        <>
+        <NavbarItem>
+        <Button as={Link} className="bg-base-color-red text-base-color-white" href="/login" variant="flat">
           Login
         </Button>
       </NavbarItem>
+        </>
+      )}
     </NavbarContent>
+    {isLoggedIn && (
+        <NavbarItem>
+          <Dropdown placement="bottom-end">
+            <DropdownTrigger>
+              <Avatar
+                isBordered
+                as="button"
+                className="transition-transform"
+                color="success"
+                name="Bamboo"
+                size="sm"
+                src={session?.user?.image as string}
+              />
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Profile Actions" variant="flat">
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-semibold">{session?.user?.email}</p>
+              </DropdownItem>
+              <DropdownItem onClick={() => signOut()} key="logout" color="danger">
+                Sign out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </NavbarItem>
+      )}
 
     <NavbarMenu>
       {menu.map((item, index) => (

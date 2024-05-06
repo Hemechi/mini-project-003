@@ -14,6 +14,10 @@ export const menu = [
     {
         title : "Policy",
         path : "/policy"
+    },
+    {
+        title : "My Cart",
+        path : "/cart"
     }
 ]
 
