@@ -14,7 +14,7 @@ import SponsorComponent from '@/components/sponsor/SponsorComponent';
 import AboutCardComponent from '@/components/cards/AboutCardComponent';
 import AttractionComponent from '@/components/cards/AttractionComponent';
 import { Button } from 'flowbite-react';
-import { useGetProductsQuery } from '@/redux/service/ecommerce';
+import { useGetProductsQuery } from '@/redux/service/product';
 
 
 export default function Home() {

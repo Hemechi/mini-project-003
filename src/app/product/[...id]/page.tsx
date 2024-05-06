@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart, selectProducts } from '@/redux/features/cart/cartSlice'
 import { increment } from '@/redux/features/counter/counterSlice'
 import { ProductType } from '@/lib/definitions'
-import { useGetProductByIdQuery } from '@/redux/service/ecommerce'
+import { useGetProductByIdQuery } from '@/redux/service/product'
 import LoadingComponent from '@/app/loading'
 import DetailCard from '@/components/cards/DetailCard'
 
