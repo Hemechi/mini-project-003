@@ -1,0 +1,14 @@
+version: '3'
+services:
+  helen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3269:3000
+    networks:
+      - devops
+networks:
+  devops:
+    external: true
