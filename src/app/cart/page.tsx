@@ -6,6 +6,7 @@ import {
 } from "@/redux/features/cart/cartSlice";
 import { removeFromCart } from "@/redux/features/cart/cartSlice";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function Cart() {
 	const { data: session } = useSession();
@@ -18,7 +19,7 @@ export default function Cart() {
 		<>
 		{session ? (
 			<main className="container mx-auto py-5">
-				{products.length == 0 && <h1 className="text-5xl w-screen h-screen flex justify-center items-center">Cart is Empty!</h1>}
+				{products.length == 0 && <h1 className="text-5xl w-full h-screen flex justify-center items-center">Cart is Empty!</h1>}
 				{products.length !== 0 && (
 					<div className="sm:px-5 md:px-10 lg:px-0">
 						<h1 className="text-3xl font-medium">
@@ -40,8 +41,9 @@ export default function Cart() {
 								<div>
 									<h1>{product.name}</h1>
 									<h2 className="text-base-color-red py-3">${product.price}</h2>
-									<img
-										className="h-[100px]"
+									<Image
+										width={100}
+										height={100}
 										src={product.image}
 										alt={product.name}
 									/>
@@ -59,7 +61,7 @@ export default function Cart() {
 				</div>
 			</main>
 			) : (
-				<div className="w-full h-screen flex flex-col justify-center items-center">
+				<div className="w-full h-screen flex flex-col justify-center text-5xl items-center">
 					Unauthorize!
 				</div>
 			)}

@@ -140,7 +140,7 @@ export default function Login() {
 						</button>
 					</div>
 					<div>
-						Doesn't has an account?&nbsp;
+						Do not has an account?&nbsp;
 						<Link className={`${style.link}`} href="/register">Create new account</Link>
 					</div>
 				</Form>
