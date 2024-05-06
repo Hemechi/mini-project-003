@@ -3,20 +3,20 @@ import counterSlice from './features/counter/counterSlice'
 import cartSlice from './features/cart/cartSlice'
 import userProfileSlice from './features/userProfile/userProfileSlice'
 import authSlice from './features/auth/authSlice'
-import { ecommerceApi } from './service/product'
+import { productApi } from './service/product'
 // create store
 export const makeStore = () => {
   return configureStore({
     reducer: {
       // Add the generated reducer as a specific top-level slice
-      [ecommerceApi.reducerPath]: ecommerceApi.reducer,
+      [productApi.reducerPath]: productApi.reducer,
       counter: counterSlice,
       cart: cartSlice,
       userProfile: userProfileSlice,
       auth: authSlice
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(ecommerceApi.middleware),
+      getDefaultMiddleware().concat(productApi.middleware),
 
   })
 }
